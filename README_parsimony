@@ -1,0 +1,66 @@
+# README
+
+## Overview
+This project simulates the evolution of sequences and evaluates the accuracy of phylogenetic tree reconstruction. It uses the BLOSUM62 substitution matrix to calculate sequence distances and employs various methods to simulate sequence mutations, speciation, and extinction events. The project also includes functions to generate and visualize phylogenetic trees, calculate parsimony scores, and compare tree lengths.
+
+## Dependencies
+- Python 3.x
+- Biopython
+- NumPy
+- Matplotlib
+
+## Installation
+To install the required dependencies, run:
+```bash
+pip install biopython numpy matplotlib
+```
+
+## Usage
+
+### Load BLOSUM62 Matrix
+The BLOSUM62 substitution matrix is loaded using Biopython's `substitution_matrices` module.
+
+### Sequence Mutation
+The `mutate_sequence` function introduces random mutations into a given sequence based on a specified mutation rate.
+
+### Simulate Evolution
+The `simulate_evolution` function simulates the evolution of sequences, including speciation and extinction events. It returns the evolved sequences, the history of the tree, and mutation counts.
+
+### Generate Newick Tree
+The `generate_newick` function constructs a Newick tree from the tree history.
+
+### Export Tree to Newick Format
+The `export_tree_to_newick` function exports the generated tree to Newick format.
+
+### Calculate BLOSUM62 Distance
+The `blosum62_distance` function calculates the BLOSUM62 distance between two sequences.
+
+### Draw Tree
+The `draw_tree` function visualizes the phylogenetic tree using Matplotlib.
+
+### Plot Distance Comparisons
+The `plot_distances` function plots histograms comparing original and rearranged distances.
+
+### Evaluate Tree Rearrangement
+The `evaluate_tree_rearrangement` function evaluates the effect of tree rearrangement on the total distance.
+
+### Parsimony Score
+The `parsimony_score` function calculates the parsimony score of a tree based on the given sequences.
+
+### Generate Random Trees
+The `generate_random_trees` function generates random phylogenetic trees.
+
+### Calculate Tree Lengths
+The `calculate_tree_lengths` function calculates the true and estimated lengths of the trees.
+
+### Main Function
+The `main` function simulates the evolution of sequences at different evolutionary distances, generates random trees, and calculates the mean and standard deviation of the differences between true and estimated tree lengths.
+
+## Running the Code
+To run the code, execute the following command:
+```bash
+python your_script_name.py
+```
+
+## Example Output
+The script will print the mean difference and standard deviation of the differences between true and estimated tree lengths for each evolutionary distance.
