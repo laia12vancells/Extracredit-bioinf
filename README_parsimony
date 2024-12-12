@@ -1,66 +1,89 @@
-# README
+# Overview
+This Python script simulates the evolution of sequences, constructs phylogenetic trees, and evaluates tree-reconstruction methods based on evolutionary distance metrics. The program uses the Biopython library for handling phylogenetic trees, NumPy for matrix operations, and Matplotlib for visualization.
 
-## Overview
-This project simulates the evolution of sequences and evaluates the accuracy of phylogenetic tree reconstruction. It uses the BLOSUM62 substitution matrix to calculate sequence distances and employs various methods to simulate sequence mutations, speciation, and extinction events. The project also includes functions to generate and visualize phylogenetic trees, calculate parsimony scores, and compare tree lengths.
+## Features
 
-## Dependencies
-- Python 3.x
-- Biopython
-- NumPy
-- Matplotlib
+### Simulate Evolution:
+- Mutates a sequence over time with a specified mutation rate.
+- Incorporates speciation and extinction probabilities.
+- Tracks the evolution of sequences across generations.
 
-## Installation
-To install the required dependencies, run:
-```bash
-pip install biopython numpy matplotlib
-```
+### Phylogenetic Tree Generation:
+- Constructs a phylogenetic tree in Newick format based on simulated evolutionary history.
+- Visualizes the tree structure using Matplotlib.
 
-## Usage
+### Distance Calculation:
+- Calculates pairwise distances between sequences using the BLOSUM62 substitution matrix.
+- Evaluates the similarity of reconstructed trees to true evolutionary distances.
 
-### Load BLOSUM62 Matrix
-The BLOSUM62 substitution matrix is loaded using Biopython's `substitution_matrices` module.
+### Tree Reconstruction and Evaluation:
+- Implements the UPGMA method for clustering.
+- Evaluates tree-reconstruction accuracy using root mean square (RMS) differences.
 
-### Sequence Mutation
-The `mutate_sequence` function introduces random mutations into a given sequence based on a specified mutation rate.
+### Graphical Output:
+- Generates histograms to compare pairwise distances before and after tree rearrangement.
 
-### Simulate Evolution
-The `simulate_evolution` function simulates the evolution of sequences, including speciation and extinction events. It returns the evolved sequences, the history of the tree, and mutation counts.
+## Requirements
 
-### Generate Newick Tree
-The `generate_newick` function constructs a Newick tree from the tree history.
+### Python Libraries
+- Biopython (`pip install biopython`)
+- NumPy (`pip install numpy`)
+- Matplotlib (`pip install matplotlib`)
 
-### Export Tree to Newick Format
-The `export_tree_to_newick` function exports the generated tree to Newick format.
+## Key Functions
 
-### Calculate BLOSUM62 Distance
-The `blosum62_distance` function calculates the BLOSUM62 distance between two sequences.
+### 1. Simulating Evolution
+- `mutate_sequence(sequence, mutation_rate)`: Introduces mutations into a sequence based on the mutation rate.
+- `simulate_evolution(sequence, num_leaf_sequences, mutation_rate, extinction_prob, speciation_prob)`: Simulates the evolutionary process, including mutation, speciation, and extinction.
 
-### Draw Tree
-The `draw_tree` function visualizes the phylogenetic tree using Matplotlib.
+### 2. Phylogenetic Tree Operations
+- `generate_newick(tree_history)`: Constructs a Newick-formatted tree from evolutionary history.
+- `draw_tree(tree)`: Visualizes the phylogenetic tree using Matplotlib.
 
-### Plot Distance Comparisons
-The `plot_distances` function plots histograms comparing original and rearranged distances.
+### 3. Distance Calculations
+- `blosum62_distance(seq1, seq2)`: Computes the BLOSUM62 score between two sequences.
+- `calculate_rms(true_distances, estimated_distances)`: Calculates the RMS difference between true and estimated distances.
 
-### Evaluate Tree Rearrangement
-The `evaluate_tree_rearrangement` function evaluates the effect of tree rearrangement on the total distance.
+### 4. Tree Reconstruction
+- `upgma(distance_matrix)`: Constructs a tree using the UPGMA method.
+- `evaluate_tree_rearrangement(tree, distance_matrix)`: Evaluates the effectiveness of tree rearrangement.
 
-### Parsimony Score
-The `parsimony_score` function calculates the parsimony score of a tree based on the given sequences.
+## How to Use
 
-### Generate Random Trees
-The `generate_random_trees` function generates random phylogenetic trees.
+### Run the Script:
+Execute the script directly with `python <script_name>.py`.
 
-### Calculate Tree Lengths
-The `calculate_tree_lengths` function calculates the true and estimated lengths of the trees.
+### Main Workflow:
+1. A starting sequence is generated.
+2. Simulated evolution produces descendant sequences.
+3. A phylogenetic tree is constructed and visualized.
+4. Pairwise distances are calculated for evaluation.
+5. Tree-reconstruction methods (e.g., UPGMA) are tested and compared.
 
-### Main Function
-The `main` function simulates the evolution of sequences at different evolutionary distances, generates random trees, and calculates the mean and standard deviation of the differences between true and estimated tree lengths.
+### Customization:
+- Adjust evolutionary parameters (`mutation_rate`, `extinction_prob`, `speciation_prob`) for different simulations.
+- Change the number of leaf sequences (`num_leaf_sequences`) or trees (`num_trees`).
 
-## Running the Code
-To run the code, execute the following command:
-```bash
-python your_script_name.py
-```
+## Output
+- **Tree Visualization**: Displays the tree structure using Matplotlib.
+- **Distance Metrics**: Prints RMS differences for each evolutionary distance tested.
+- **Histograms**: Compares pairwise distances before and after tree rearrangement.
 
-## Example Output
-The script will print the mean difference and standard deviation of the differences between true and estimated tree lengths for each evolutionary distance.
+## Example Usage
+
+```python
+start_sequence = "ACDEFGHIKLMNPQRSTVWY" * 10
+num_leaf_sequences = 20
+mutation_rate = 0.05
+
+# Simulate evolution
+sequences, tree_history, mutation_counts = simulate_evolution(
+    start_sequence, num_leaf_sequences, mutation_rate
+)
+
+# Generate and visualize tree
+phylo_tree = generate_newick(tree_history)
+draw_tree(phylo_tree)
+
+# Evaluate reconstruction
+evaluate_upgma_fitch_margoliash(sequences, mutation_counts, [50, 100, 200])
