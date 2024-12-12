@@ -40,8 +40,7 @@ pip install numpy biopython matplotlib
 4. **Generating Newick Tree**: A phylogenetic tree is generated from the evolutionary history and exported in Newick format.
 5. **Calculating BLOSUM62 Distance**: The BLOSUM62 distance between sequences is calculated using global alignment.
 6. **Drawing Phylogenetic Tree**: The phylogenetic tree is visualized using Matplotlib.
-7. **Plotting Distance Comparisons**: Histograms are plotted to compare original and rearranged distances.
-8. **Evaluating Tree Rearrangement**: The effectiveness of tree rearrangement is evaluated by comparing the sum of pairwise distances before and after rearrangement.
+7. **Evaluating Tree Rearrangement**: The effectiveness of tree rearrangement is evaluated by comparing the sum of pairwise distances before and after rearrangement.
 
 ```
 
